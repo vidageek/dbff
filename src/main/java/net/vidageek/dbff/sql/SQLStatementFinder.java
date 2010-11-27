@@ -6,8 +6,8 @@ import java.util.List;
  * @author jonasabreu
  * 
  */
-public interface SqlStatementFinder {
+public interface SQLStatementFinder {
 
-	List<SqlStatement> findAll();
+	List<SQLStatement> findAll();
 
 }
