@@ -1,4 +1,4 @@
-package net.vidageek.dbff.sql.jdbc;
+package net.vidageek.dbff.sql.hibernate;
 
 import net.vidageek.dbff.sql.SQLExecutor;
 import net.vidageek.dbff.sql.SQLStatement;
@@ -7,7 +7,7 @@ import net.vidageek.dbff.sql.SQLStatement;
  * @author jonasabreu
  * 
  */
-final public class JDBCSQLExecutor implements SQLExecutor {
+final public class HibernateSQLExecutor implements SQLExecutor {
 
 	public void afterExecution() {
 	}
