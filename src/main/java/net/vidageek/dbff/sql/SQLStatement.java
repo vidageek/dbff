@@ -10,4 +10,6 @@ public interface SQLStatement {
 
 	String getSql();
 
+	Integer getVersion();
+
 }

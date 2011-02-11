@@ -6,10 +6,8 @@ package net.vidageek.dbff.sql;
  */
 public interface SQLExecutor {
 
-	void execute(SQLStatement sqlStatement);
+	void execute(SQLStatement statement);
 
-	void beforeExecution();
-
-	void afterExecution();
+	Integer executeAndReturnInteger(SQLStatement statement);
 
 }

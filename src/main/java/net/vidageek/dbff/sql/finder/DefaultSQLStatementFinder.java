@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import net.vidageek.dbff.sql.SQLStatement;
 import net.vidageek.dbff.sql.SQLStatementFinder;
-import net.vidageek.dbff.sql.statement.DefaultSQLStatement;
+import net.vidageek.dbff.sql.statement.FileSQLStatement;
 
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
@@ -29,7 +29,7 @@ final public class DefaultSQLStatementFinder implements SQLStatementFinder {
 		pattern = Pattern.compile(".*?\\.dbff");
 	}
 
-	public List<SQLStatement> findAll() {
+	public List<SQLStatement> findAll(final Integer lastVersion) {
 		List<SQLStatement> list = new ArrayList<SQLStatement>();
 		final Reflections reflections = new Reflections("", new ResourcesScanner());
 		Set<String> resources = reflections.getResources(pattern);
@@ -38,7 +38,7 @@ final public class DefaultSQLStatementFinder implements SQLStatementFinder {
 			final String normalizedResource = "/" + resourceName;
 
 			if (normalizedResource.startsWith(path)) {
-				list.add(new DefaultSQLStatement(normalizedResource));
+				list.add(new FileSQLStatement(normalizedResource));
 			}
 		}
 		return list;

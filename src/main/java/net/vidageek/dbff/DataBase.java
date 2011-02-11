@@ -14,18 +14,19 @@ final public class DataBase {
 
 	private final SQLExecutor executor;
 	private final SQLStatementFinder finder;
+	private final DBFFManager manager;
 
-	public DataBase(final SQLExecutor executor, final SQLStatementFinder finder) {
+	public DataBase(final SQLExecutor executor, final SQLStatementFinder finder, final DBFFManager manager) {
 		this.executor = executor;
 		this.finder = finder;
+		this.manager = manager;
 	}
 
 	public void fastForward() {
-		List<SQLStatement> statements = finder.findAll();
+		List<SQLStatement> statements = finder.findAll(manager.lastVersion());
 		for (SQLStatement sqlStatement : statements) {
-			executor.beforeExecution();
 			executor.execute(sqlStatement);
-			executor.afterExecution();
 		}
+		manager.update(statements.get(statements.size() - 1).getVersion());
 	}
 }

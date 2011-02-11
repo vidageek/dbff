@@ -1,8 +1,5 @@
 package net.vidageek.dbff.sql.statement;
 
-import java.util.Scanner;
-
-import net.vidageek.dbff.exception.DBFFException;
 import net.vidageek.dbff.sql.SQLStatement;
 
 /**
@@ -11,24 +8,22 @@ import net.vidageek.dbff.sql.SQLStatement;
  */
 final public class DefaultSQLStatement implements SQLStatement {
 
-	private final String name;
 	private final String sql;
 
-	public DefaultSQLStatement(final String resourceName) {
-		try {
-			name = resourceName;
-			sql = new Scanner(DefaultSQLStatement.class.getResourceAsStream(resourceName)).useDelimiter("$$").next();
-		} catch (Exception e) {
-			throw new DBFFException("Could not create SQLStatement.", e);
-		}
+	public DefaultSQLStatement(final String sql) {
+		this.sql = sql;
 	}
 
 	public String getName() {
-		return name;
+		return "";
 	}
 
 	public String getSql() {
 		return sql;
+	}
+
+	public Integer getVersion() {
+		return -1;
 	}
 
 }

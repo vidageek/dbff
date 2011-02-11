@@ -8,6 +8,6 @@ import java.util.List;
  */
 public interface SQLStatementFinder {
 
-	List<SQLStatement> findAll();
+	List<SQLStatement> findAll(Integer integer);
 
 }

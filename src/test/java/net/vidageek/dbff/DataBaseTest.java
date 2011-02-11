@@ -30,6 +30,9 @@ final public class DataBaseTest {
 	@Mock
 	private SQLStatement statement;
 
+	@Mock
+	private DBFFManager manager;
+
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -37,11 +40,14 @@ final public class DataBaseTest {
 
 	@Test
 	public void testThatExecutesAllSqlFound() {
-		when(finder.findAll()).thenReturn(Arrays.asList(statement, statement, statement));
+		when(manager.lastVersion()).thenReturn(1);
+		when(finder.findAll(1)).thenReturn(Arrays.asList(statement, statement, statement));
+		when(statement.getVersion()).thenReturn(1);
 
-		new DataBase(executor, finder).fastForward();
+		new DataBase(executor, finder, manager).fastForward();
 
-		verify(finder).findAll();
+		verify(finder).findAll(1);
 		verify(executor, times(3)).execute(statement);
+		verify(manager).update(1);
 	}
 }

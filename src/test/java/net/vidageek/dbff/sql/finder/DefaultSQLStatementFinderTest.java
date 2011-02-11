@@ -25,13 +25,20 @@ final public class DefaultSQLStatementFinderTest {
 
 	@Test
 	public void testThatFindAllStatements() {
-		List<SQLStatement> list = new DefaultSQLStatementFinder("/dbff").findAll();
+		List<SQLStatement> list = new DefaultSQLStatementFinder("/dbff").findAll(null);
 
-		Assert.assertEquals(2, list.size());
+		Assert.assertEquals(3, list.size());
 		Assert.assertEquals("/dbff/1-dbff.dbff", list.get(0).getName());
 		Assert.assertEquals("sql goes here", list.get(0).getSql());
 		Assert.assertEquals("/dbff/2-dbff.dbff", list.get(1).getName());
 		Assert.assertEquals("and here too", list.get(1).getSql());
+		Assert.assertEquals("/dbff/101-dbff.dbff", list.get(2).getName());
+		Assert.assertEquals("somthing", list.get(2).getSql());
+	}
+
+	@Test
+	public void testThatOrderUsingVersion() {
+
 	}
 
 }
